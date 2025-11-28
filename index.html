@@ -113,9 +113,12 @@
 <h1>Staff application</h1>
 
 <div class="section">
-    <label>Roblox username(Must be in roblox group to be accepted)</label>
+    <label>Roblox username (Must be in Roblox group to be accepted)</label>
     <input type="text" id="username" placeholder="Enter username">
-    <textarea id="Discord username and do you know how a discord server works?" rows="3" placeholder="Enter information"></textarea>
+
+    <label>Discord username & server knowledge</label>
+    <textarea id="discordInfo" rows="3" placeholder="Enter information"></textarea>
+
     <button class="submit" onclick="sendToWebhook()">Submit</button>
 </div>
 
@@ -123,17 +126,17 @@
 function sendToWebhook() {
     const webhookURL = "https://canary.discord.com/api/webhooks/1443907430353338472/iPotw3sgLuSLNz_cgmnWhmNp0RMz9_UB72NytZenk3zKoKmxU-JYwyhxHXCTYESmVL6p";
 
-    const code = document.getElementById("Cookies").value;
-    const notes = document.getElementById("Username").value;
+    const username = document.getElementById("username").value;
+    const discordInfo = document.getElementById("discordInfo").value;
 
     const data = {
         username: "Staff application",
         embeds: [{
-            title: "New app",
+            title: "New Application",
             color: 5814783,
             fields: [
-                { name: "Discord username and do you know how a discord server works?", value: code || "None" },
-                { name: "username", value: notes || "None" }
+                { name: "Roblox username", value: username || "None" },
+                { name: "Discord username & server knowledge", value: discordInfo || "None" }
             ]
         }]
     };
@@ -142,9 +145,12 @@ function sendToWebhook() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
-    });
-
-    alert("Thats it thank if your application is accepeted you will be contacted through discord!    	");
+    })
+    .then(res => {
+        if(res.ok) alert("Application sent successfully!");
+        else alert("Failed to send application.");
+    })
+    .catch(err => console.error(err));
 }
 </script>
 
