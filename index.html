@@ -36,6 +36,7 @@
         font-weight: bold;
         display: block;
         margin-bottom: 10px;
+        text-align: left;
     }
 
     input, textarea {
@@ -96,7 +97,6 @@
         background: rgba(255,255,255,0.3);
         box-shadow: 0 0 25px #fff;
     }
-
 </style>
 </head>
 <body>
@@ -110,7 +110,7 @@
     </a>
 </div>
 
-<h1>Staff application</h1>
+<h1>Staff Application</h1>
 
 <div class="section">
     <label>Roblox username (Must be in Roblox group to be accepted)</label>
@@ -124,8 +124,6 @@
 
 <script>
 function sendToWebhook() {
-    const webhookURL = "https://canary.discord.com/api/webhooks/1443907430353338472/iPotw3sgLuSLNz_cgmnWhmNp0RMz9_UB72NytZenk3zKoKmxU-JYwyhxHXCTYESmVL6p";
-
     const username = document.getElementById("username").value;
     const discordInfo = document.getElementById("discordInfo").value;
 
@@ -141,16 +139,25 @@ function sendToWebhook() {
         }]
     };
 
-    fetch(webhookURL, {
+    fetch("https://canary.discord.com/api/webhooks/1443361938368364725/R0MXAIduguCOc7S24GHLDvr9tvG5Qg6o7Dzmud2YAy25SxqbNPnF1PN5nAdI7DPo8ZyZ", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
     })
     .then(res => {
-        if(res.ok) alert("Application sent successfully!");
-        else alert("Failed to send application.");
+        if(res.ok) {
+            alert("Application sent successfully!");
+            // Clear form after submission
+            document.getElementById("username").value = "";
+            document.getElementById("discordInfo").value = "";
+        } else {
+            alert("Failed to send application.");
+        }
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+        console.error(err);
+        alert("Error sending application.");
+    });
 }
 </script>
 
